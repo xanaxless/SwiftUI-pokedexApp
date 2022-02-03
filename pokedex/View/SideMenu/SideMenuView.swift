@@ -9,17 +9,18 @@ import SwiftUI
 
 struct SideMenuView: View {
     @Binding var isShowing: Bool
+    let menu: [String] = ["Profile", "Library", "Competition", "Settings"]
     var body: some View {
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [.gray, .blue]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             VStack{
                 SideMenuHeaderView(isShowing: $isShowing)
                     .foregroundColor(.white)
                     .frame(height: 240)
                 
-                ForEach(0..<5) { _ in
-                    SideMenuOptionView()
+                ForEach(menu, id: \.self) { name in
+                    SideMenuOptionView(nameOfField: name)
                 }
                 Spacer()
             }

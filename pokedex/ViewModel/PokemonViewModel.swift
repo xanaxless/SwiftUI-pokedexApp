@@ -59,6 +59,23 @@ extension PokemonViewModel {
     func changeForOne(){
         num = (num+1) % 3
     }
+    
+    
+    func typeSortingTool(type:String) -> Int{
+        switch type {
+        case "fire": return 1
+        case "poison": return 2
+        case "water": return 3
+        case "electric": return 4
+        case "psychis": return 5
+        case "normal": return 6
+        case "ground": return 7
+        case "flying": return 8
+        case "fairy": return 9
+        default: return 10
+        }
+    }
+    
     func sorting(){
         if (num == 0 ){
             pokemon.sort { pokemon1, pokemon2 in
@@ -67,7 +84,7 @@ extension PokemonViewModel {
         }
         else if( num == 1){
             pokemon.sort { pokemon1, pokemon2 in
-                return (pokemon1.type == "fire") ? true : false
+                return typeSortingTool(type: pokemon1.type)<typeSortingTool(type: pokemon2.type)
             }
         }
         else{
