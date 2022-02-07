@@ -18,7 +18,7 @@ struct pokedexApp: App {
     
     var body: some Scene {
         WindowGroup {
-           PokedexView()
+           LoginPage()
         }
     }
 }

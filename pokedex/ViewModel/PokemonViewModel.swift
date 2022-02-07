@@ -38,7 +38,7 @@ class PokemonViewModel : ObservableObject{
         case "psychis": return .systemPurple
         case "normal": return .systemOrange
         case "ground": return .systemGray
-        case "flying": return .systemBlue
+        case "flying": return .systemCyan
         case "fairy": return .systemPink
         default: return .systemIndigo
         }

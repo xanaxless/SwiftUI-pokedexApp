@@ -36,6 +36,7 @@ struct PokedexView: View {
                 }
             }
         }
+        .navigationBarHidden(true)
         
     }
 }
