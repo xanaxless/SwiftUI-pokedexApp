@@ -9,9 +9,10 @@ import SwiftUI
 
 struct PokemonLibrary: View {
     private let gridItems = [GridItem(.flexible()), GridItem(.flexible())]
-    @ObservedObject var viewModel = PokemonViewModel()
+    @ObservedObject var viewModel = PokemonLibraryViewModel()
     init() {
         viewModel.fetchPokemon()
+        viewModel.isLiked()
     }
     var body: some View {
         ZStack(alignment: .bottomTrailing) {

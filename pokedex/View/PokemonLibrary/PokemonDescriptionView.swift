@@ -13,6 +13,8 @@ struct PokemonDescriptionView: View {
     var backgroundColor: UIColor{
         pokedex.backgroundColor(forType: pokemon.type)
     }
+    @ObservedObject var descriptionViewModel = DescriptionModelView()
+    
     var body: some View {
         GeometryReader { geo in
             VStack {
@@ -23,13 +25,32 @@ struct PokemonDescriptionView: View {
                         .foregroundColor(.white)
                     VStack(spacing: 20){
                         Text(pokemon.name).font(.largeTitle)
-                        TypeOfPokemon(type: pokemon.type, color: backgroundColor)
+                        HStack {
+                            TypeOfPokemon(type: pokemon.type, color: backgroundColor).overlay {
+                                Button(action: {
+                                    if !descriptionViewModel.isLiked{
+                                        descriptionViewModel.sendLikedPokemon(id: pokemon.id)
+                                    }
+                                    else{
+                                        descriptionViewModel.deleteLikedPokemon(id: pokemon.id)
+                                    }
+                                }, label: {
+                                    Image(systemName: descriptionViewModel.isLiked ? "heart.fill": "heart")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundColor(Color(backgroundColor))
+                                        .frame(width: 30, height: 50)
+                                    .padding(.trailing, 200)
+                                })
+                            }
+                        }
                         Text(pokemon.description).padding(.horizontal)
                         StatView(weight: pokemon.weight, attack: pokemon.attack, defence: pokemon.defense, height: pokemon.height)
                     }.padding(.top, 50)
                 }
             }.background(Color(backgroundColor))
         }.ignoresSafeArea()
+           
     }
 }
 

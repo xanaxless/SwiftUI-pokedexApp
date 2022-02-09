@@ -51,7 +51,11 @@ struct LoginPage: View {
                     .shadow(radius: 10)
                     Button {
                         withAnimation(.spring()) {
-                            loginModelView.register(email: email, password: password)
+                            if !isLoginPage {
+                                loginModelView.register(email: email, password: password)
+                            } else {
+                                loginModelView.login(email: email, password: password)
+                            }
                         }
                     } label: {
                         RoundedRectangle(cornerRadius: 25)
@@ -69,7 +73,6 @@ struct LoginPage: View {
                         Text(isLoginPage ? "Register" : "Login")
                     }
                     .frame(width: 240, height: 20, alignment: .center)
-
                 }
                 
             } else {

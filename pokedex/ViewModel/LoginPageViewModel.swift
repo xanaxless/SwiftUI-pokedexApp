@@ -11,6 +11,8 @@ import Firebase
 class LoginPageViewModel:ObservableObject {
     @Published var shouldNavigate: Bool = false
     
+    let db = Firestore.firestore()
+    
     func register(email: String, password: String){
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
@@ -18,6 +20,15 @@ class LoginPageViewModel:ObservableObject {
                 return
             }
             self.shouldNavigate.toggle()
+        }
+        db.collection(Constans.collectionForLiked).document(email).setData([
+            "ids" : []
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
         }
     }
      

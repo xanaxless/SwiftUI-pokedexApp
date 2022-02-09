@@ -9,9 +9,10 @@ import SwiftUI
 
 struct SideMenuOptionView: View {
     var nameOfField: String
+    var nameOfImage: String
     var body: some View {
         HStack(spacing: 16){
-            Image(systemName: "person")
+            Image(systemName: nameOfImage)
                 .frame(width: 24, height: 24)
             Text(nameOfField)
                 .font(.system(size:15, weight: .semibold))
@@ -23,6 +24,6 @@ struct SideMenuOptionView: View {
 
 struct SideMenuOptionView_Previews: PreviewProvider {
     static var previews: some View {
-        SideMenuOptionView(nameOfField: "Profile")
+        SideMenuOptionView(nameOfField: "Profile", nameOfImage: "People")
     }
 }

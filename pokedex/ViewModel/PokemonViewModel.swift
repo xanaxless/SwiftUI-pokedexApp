@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
-class PokemonViewModel : ObservableObject{
+import Firebase
+class PokemonLibraryViewModel : ObservableObject{
     @Published var pokemon = [Pokemon]()
     var num = 1
+    var listOfLikedPokemons = [Int]()
     let baseurl = "https://pokedex-bb36f.firebaseio.com/pokemon.json"
+    let db = Firestore.firestore()
+    let user = Auth.auth().currentUser
     func fetchPokemon(){
         guard let url = URL(string: baseurl) else{
             return
@@ -55,7 +59,7 @@ extension Data{
     }
 }
 
-extension PokemonViewModel {
+extension PokemonLibraryViewModel {
     func changeForOne(){
         num = (num+1) % 3
     }
@@ -93,5 +97,26 @@ extension PokemonViewModel {
             }
         }
         changeForOne()
+    }
+}
+
+
+extension PokemonLibraryViewModel{
+    
+    func isLiked(){
+        db.collection(Constans.collectionForLiked).document("\(user?.email ?? "Pokemon")").getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let data = data {
+                    print("data", data)
+                    self.listOfLikedPokemons =  data["ids"] as! [Int] 
+                } else {
+                    print("Document does not exist")
+                }
+            }
+            
+        }
+        print("the list")
+        print(listOfLikedPokemons)
     }
 }

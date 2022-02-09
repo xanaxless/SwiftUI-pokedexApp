@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-
+import Firebase
 struct SideMenuHeaderView: View {
     @Binding var isShowing: Bool
-    
+    let user = Auth.auth().currentUser
     var body: some View {
         ZStack(alignment: .topTrailing){
             
@@ -33,16 +33,12 @@ struct SideMenuHeaderView: View {
                     .clipShape(Circle())
                     .frame(width: 64, height: 64)
                     .padding(.bottom, 20)
-                Text("Yerkebulan")
+                Text("\(user?.email ?? "Pokemon")")
                     .font(.system(size: 24, weight: .semibold))
                 Text("@xanaxless")
                     .font(.system(size: 14))
                     .padding(.bottom)
                 HStack(spacing: 12){
-                    HStack(spacing:4){
-                        Text("123").bold()
-                        Text("Friends")
-                    }
                     HStack(spacing:4){
                         Text("21").bold()
                         Text("Pokemons")

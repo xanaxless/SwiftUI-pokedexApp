@@ -9,12 +9,12 @@ import SwiftUI
 import Kingfisher
 struct PokemonCell: View {
     var pokemon: Pokemon
-    var viewModel: PokemonViewModel
+    var viewModel: PokemonLibraryViewModel
     var backgroundColor: Color
-    init(pokemon: Pokemon, viewModel: PokemonViewModel) {
+    init(pokemon: Pokemon, viewModel: PokemonLibraryViewModel) {
         self.pokemon = pokemon
         self.viewModel = viewModel
-        self.backgroundColor = Color(PokemonViewModel().backgroundColor(forType: pokemon.type))
+        self.backgroundColor = Color(PokemonLibraryViewModel().backgroundColor(forType: pokemon.type))
     }
     var body: some View {
         NavigationLink(destination: PokemonDescriptionView(pokemon: pokemon)) {

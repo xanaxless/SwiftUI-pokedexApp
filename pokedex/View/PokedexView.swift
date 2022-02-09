@@ -18,7 +18,8 @@ struct PokedexView: View {
                     SideMenuView(isShowing: $isShowing)
                 }
                 PokemonLibrary()
-                .cornerRadius(isShowing ? 20 : 0)
+    
+                    .cornerRadius(isShowing ? 20 : 0)
                 .edgesIgnoringSafeArea([.bottom])
                 .scaleEffect(isShowing ? 0.8 : 1)
                 .offset(x: isShowing ? 300 : 0, y: isShowing ? 44 : 0)
